@@ -1421,7 +1421,7 @@ impl<'a> MessageGen<'a> {
     }
 
     fn write_write_to_with_cached_sizes(&self, w: &mut CodeWriter) {
-        w.def_fn("write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write", |w| {
+        w.def_fn("write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()>", |w| {
             // To have access to its methods but not polute the name space.
             for f in self.fields_except_oneof_and_group() {
                 write_message_write_field(w, f);

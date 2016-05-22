@@ -106,7 +106,7 @@ impl ::protobuf::Message for Test1 {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.value {
             try!(w.write_int32(1, v));
         };
@@ -276,7 +276,7 @@ impl ::protobuf::Message for TestRepeatedBool {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         for v in self.values.iter() {
             try!(w.write_bool(1, *v));
         };
@@ -447,7 +447,7 @@ impl ::protobuf::Message for TestRepeatedPackedInt32 {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         if !self.values.is_empty() {
             try!(w.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
             // TODO: Data size is computed again, it should be cached
@@ -692,7 +692,7 @@ impl ::protobuf::Message for TestRepeatedMessages {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         for v in self.messages1.iter() {
             try!(w.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
             try!(w.write_raw_varint32(v.get_cached_size()));
@@ -980,7 +980,7 @@ impl ::protobuf::Message for TestOptionalMessages {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.message1.as_ref() {
             try!(w.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
             try!(w.write_raw_varint32(v.get_cached_size()));
@@ -1277,7 +1277,7 @@ impl ::protobuf::Message for TestStrings {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.s1.as_ref() {
             try!(w.write_string(1, &v));
         };
@@ -1480,7 +1480,7 @@ impl ::protobuf::Message for TestBytes {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.b1.as_ref() {
             try!(w.write_bytes(1, &v));
         };
@@ -1891,7 +1891,7 @@ impl ::protobuf::Message for PerftestData {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         for v in self.test1.iter() {
             try!(w.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
             try!(w.write_raw_varint32(v.get_cached_size()));

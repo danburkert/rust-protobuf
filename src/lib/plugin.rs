@@ -186,7 +186,7 @@ impl ::protobuf::Message for CodeGeneratorRequest {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         for v in self.file_to_generate.iter() {
             try!(w.write_string(1, &v));
         };
@@ -423,7 +423,7 @@ impl ::protobuf::Message for CodeGeneratorResponse {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.error.as_ref() {
             try!(w.write_string(1, &v));
         };
@@ -705,7 +705,7 @@ impl ::protobuf::Message for CodeGeneratorResponse_File {
         my_size
     }
 
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ::protobuf::ProtobufResult<()> where W: ::std::io::Write {
+    fn write_to_with_cached_sizes(&self, mut w: &mut ::std::io::Write) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.name.as_ref() {
             try!(w.write_string(1, &v));
         };

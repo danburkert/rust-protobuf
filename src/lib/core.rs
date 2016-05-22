@@ -47,7 +47,7 @@ pub trait Message : fmt::Debug + Clear + Any + Send + Sync {
 
     // sizes of this messages (and nested messages) must be cached
     // by calling `compute_size` prior to this call
-    fn write_to_with_cached_sizes<W>(&self, w: &mut W) -> ProtobufResult<()> where W: Write, Self: Sized;
+    fn write_to_with_cached_sizes(&self, w: &mut Write) -> ProtobufResult<()>;
 
     // compute and cache size of this message and all nested messages
     fn compute_size(&self) -> u32;
@@ -55,7 +55,7 @@ pub trait Message : fmt::Debug + Clear + Any + Send + Sync {
     // get size previously computed by `compute_size`
     fn get_cached_size(&self) -> u32;
 
-    fn write_to<W>(&self, w: &mut W) -> ProtobufResult<()> where W: Write, Self: Sized {
+    fn write_to(&self, w: &mut Write) -> ProtobufResult<()> {
         try!(self.check_initialized());
 
         // cache sizes
@@ -67,7 +67,7 @@ pub trait Message : fmt::Debug + Clear + Any + Send + Sync {
         Ok(())
     }
 
-    fn write_length_delimited_to<W>(&self, w: &mut W) -> ProtobufResult<()> where W: Write, Self: Sized {
+    fn write_length_delimited_to(&self, mut w: &mut Write) -> ProtobufResult<()> {
         let size = self.compute_size();
         try!(w.write_raw_varint32(size));
         try!(self.write_to_with_cached_sizes(w));
@@ -90,14 +90,14 @@ pub trait Message : fmt::Debug + Clear + Any + Send + Sync {
         }
     }
 
-    fn write_to_bytes(&self) -> ProtobufResult<Vec<u8>> where Self: Sized {
+    fn write_to_bytes(&self) -> ProtobufResult<Vec<u8>> {
         // TODO: compute message size and reserve that size
         let mut v = Vec::new();
         try!(self.write_to(&mut v));
         Ok(v)
     }
 
-    fn write_length_delimited_to_bytes(&self) -> ProtobufResult<Vec<u8>> where Self: Sized {
+    fn write_length_delimited_to_bytes(&self) -> ProtobufResult<Vec<u8>> {
         // TODO: compute message size and reserve that size
         let mut v = Vec::new();
         try!(self.write_length_delimited_to(&mut v));
