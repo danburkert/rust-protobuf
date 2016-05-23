@@ -611,7 +611,7 @@ impl<'a> CodedInputStream<'a> {
         Ok(())
     }
 
-    pub fn merge_message<M : Message>(&mut self, message: &mut M) -> ProtobufResult<()> {
+    pub fn merge_message(&mut self, message: &mut Message) -> ProtobufResult<()> {
         let len = try!(self.read_raw_varint32());
         let old_limit = try!(self.push_limit(len));
         try!(message.merge_from(self));
