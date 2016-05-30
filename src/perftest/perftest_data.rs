@@ -133,6 +133,9 @@ impl ::protobuf::Message for Test1 {
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
     }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
         ::protobuf::MessageStatic::descriptor_static(None::<Self>)
@@ -302,6 +305,9 @@ impl ::protobuf::Message for TestRepeatedBool {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
@@ -478,6 +484,9 @@ impl ::protobuf::Message for TestRepeatedPackedInt32 {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
@@ -730,6 +739,9 @@ impl ::protobuf::Message for TestRepeatedMessages {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
@@ -1018,6 +1030,9 @@ impl ::protobuf::Message for TestOptionalMessages {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
@@ -1310,6 +1325,9 @@ impl ::protobuf::Message for TestStrings {
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
     }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
         ::protobuf::MessageStatic::descriptor_static(None::<Self>)
@@ -1506,6 +1524,9 @@ impl ::protobuf::Message for TestBytes {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
@@ -1954,6 +1975,9 @@ impl ::protobuf::Message for PerftestData {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {

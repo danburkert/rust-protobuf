@@ -221,6 +221,9 @@ impl ::protobuf::Message for CodeGeneratorRequest {
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
     }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
         ::protobuf::MessageStatic::descriptor_static(None::<Self>)
@@ -454,6 +457,9 @@ impl ::protobuf::Message for CodeGeneratorResponse {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
@@ -737,6 +743,9 @@ impl ::protobuf::Message for CodeGeneratorResponse_File {
 
     fn as_any(&self) -> &::std::any::Any {
         self as &::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
     }
 
     fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {

@@ -1629,6 +1629,9 @@ impl<'a> MessageGen<'a> {
             w.def_fn("as_any(&self) -> &::std::any::Any", |w| {
                 w.write_line("self as &::std::any::Any");
             });
+            w.def_fn("into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any>", |w| {
+                w.write_line("self");
+            });
             w.write_line("");
             w.def_fn("descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor", |w| {
                 w.write_line("::protobuf::MessageStatic::descriptor_static(None::<Self>)");
