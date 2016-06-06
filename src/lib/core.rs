@@ -108,7 +108,10 @@ pub trait Message : fmt::Debug + Clear + Any + Send + Sync {
     fn mut_unknown_fields<'s>(&'s mut self) -> &'s mut UnknownFields;
 
     fn type_id(&self) -> TypeId;
+
     fn as_any(&self) -> &Any;
+
+    fn as_any_mut(&mut self) -> &mut Any;
 
     fn into_any(self: Box<Self>) -> Box<Any>;
 
