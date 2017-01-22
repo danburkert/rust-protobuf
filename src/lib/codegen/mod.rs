@@ -63,6 +63,9 @@ fn gen_file(
         w.write_generated();
 
         w.write_line("");
+        w.write_line("use std::io::Write;");
+        w.write_line("");
+        w.write_line("use protobuf::CodedOutputStream;");
         w.write_line("use protobuf::Message as Message_imported_for_functions;");
         w.write_line("use protobuf::ProtobufEnum as ProtobufEnum_imported_for_functions;");
 

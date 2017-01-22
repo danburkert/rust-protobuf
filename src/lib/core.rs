@@ -13,10 +13,8 @@ use reflect::EnumDescriptor;
 use reflect::EnumValueDescriptor;
 use unknown::UnknownFields;
 use stream::WithCodedInputStream;
-use stream::WithCodedOutputStream;
 use stream::CodedInputStream;
 use stream::CodedOutputStream;
-use stream::with_coded_output_stream_to_bytes;
 use error::ProtobufError;
 use error::ProtobufResult;
 
@@ -34,7 +32,7 @@ pub trait Message : fmt::Debug + Clear + Any + 'static {
 
     // sizes of this messages (and nested messages) must be cached
     // by calling `compute_size` prior to this call
-    fn write_to_with_cached_sizes(&self, os: &mut CodedOutputStream) -> ProtobufResult<()>;
+    fn write_to_with_cached_sizes(&self, os: &mut Write) -> ProtobufResult<()>;
 
     // compute and cache size of this message and all nested messages
     fn compute_size(&self) -> u32;
@@ -42,7 +40,7 @@ pub trait Message : fmt::Debug + Clear + Any + 'static {
     // get size previously computed by `compute_size`
     fn get_cached_size(&self) -> u32;
 
-    fn write_to(&self, os: &mut CodedOutputStream) -> ProtobufResult<()> {
+    fn write_to(&self, os: &mut Write) -> ProtobufResult<()> {
         try!(self.check_initialized());
 
         // cache sizes
@@ -54,7 +52,7 @@ pub trait Message : fmt::Debug + Clear + Any + 'static {
         Ok(())
     }
 
-    fn write_length_delimited_to(&self, os: &mut CodedOutputStream) -> ProtobufResult<()> {
+    fn write_length_delimited_to(&self, mut os: &mut Write) -> ProtobufResult<()> {
         let size = self.compute_size();
         try!(os.write_raw_varint32(size));
         try!(self.write_to_with_cached_sizes(os));
@@ -77,35 +75,18 @@ pub trait Message : fmt::Debug + Clear + Any + 'static {
         }
     }
 
-    fn write_to_writer(&self, w: &mut Write) -> ProtobufResult<()> {
-        w.with_coded_output_stream(|os| {
-            self.write_to(os)
-        })
-    }
-
-    fn write_to_vec(&self, v: &mut Vec<u8>) -> ProtobufResult<()> {
-        v.with_coded_output_stream(|os| {
-            self.write_to(os)
-        })
-    }
-
     fn write_to_bytes(&self) -> ProtobufResult<Vec<u8>> {
         // TODO: compute message size and reserve that size
         let mut v = Vec::new();
-        try!(self.write_to_vec(&mut v));
+        try!(self.write_to(&mut v));
         Ok(v)
     }
 
-    fn write_length_delimited_to_writer(&self, w: &mut Write) -> ProtobufResult<()> {
-        w.with_coded_output_stream(|os| {
-            self.write_length_delimited_to(os)
-        })
-    }
-
     fn write_length_delimited_to_bytes(&self) -> ProtobufResult<Vec<u8>> {
-        with_coded_output_stream_to_bytes(|os| {
-            self.write_length_delimited_to(os)
-        })
+        // TODO: compute message size and reserve that size
+        let mut v = Vec::new();
+        try!(self.write_length_delimited_to(&mut v));
+        Ok(v)
     }
 
     fn get_unknown_fields<'s>(&'s self) -> &'s UnknownFields;
